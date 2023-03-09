@@ -4,7 +4,15 @@
 Spring boot demo for user with roles using JWT and H2.
 
 ## Requirements
-This demo is build with with Spring boot 2.4.4.
+    - Language: Java
+    - Spring Boot: 2.5.x
+    - Group: com.nv
+    - Artifact: user-authentication-service-spring-boot
+    - Dependencies:
+    - Spring Web
+    - Spring Data JPA
+    - H2 Database
+    - Spring Security
 
 ## Usage
 *mvn spring-boot:run*
@@ -12,31 +20,13 @@ This demo is build with with Spring boot 2.4.4.
 
 **H2-Console** admin: [H2-Console](http://localhost:8080/spring-boot-jwt-security/h2-console)
 
-
 ## Backend
 POST - /oauth/token - genetare new token
 GET  - /auth/role - returns all the valid roles to be used
 POST - /api/v1/user - User adding API with unrestricted access(Require an username, password and Role)
 
 ### Database configuration
-Actually this demo is using an embedded H2 database that is automatically configured by Spring Boot. If you want to connect 
-to another database you have to specify the connection in the *application.properties* in the resource directory. Here is the sample configuration for the purpose of demo:
-
-```
-### H2 Data source config ###
-spring.datasource.url=jdbc:h2:mem:default
-spring.datasource.driverClassName=org.h2.Driver
-spring.datasource.username=sa
-spring.datasource.password=sa
-spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
-spring.datasource.initialization-mode=always
-spring.jpa.hibernate.ddl-auto=none
-
-### Enabling the H2 console ### 
-spring.h2.console.enabled=true
-
-```
+Actually this demo is using an embedded H2 database.
 
 ## Author
-
 **Nicolas Valfre**
