@@ -17,6 +17,7 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,17 @@ public class UserServiceImpl implements UserService {
         final String encode = passwordEncoder.encode(userDto.getPassword());
 
         return userRepository.save(buildNewUser(userDto, phones, token, encode));
+    }
+
+    @Override
+    public Optional<User> findByName(String token) {
+        return userRepository.findByName(token);
+    }
+
+    @Override
+    public void update(User user) {
+        user.setLastLogin(LocalDateTime.now());
+        userRepository.save(user);
     }
 
     private static User buildNewUser(UserDTO userDto, List<Phone> phones, String token, String encode) {
