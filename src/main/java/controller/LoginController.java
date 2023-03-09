@@ -18,13 +18,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public UserResponseDTO login(@RequestHeader("Authorization") String token) {
-        User user = userService.findByToken(token);
-        if (user == null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid token");
-        }
-        user.setToken(JWTUtil.generateToken(user));
-        userService.save(user);
-        return new UserResponseDTO(user);
+        return loginService.getUserByToken(token);
     }
 
 }

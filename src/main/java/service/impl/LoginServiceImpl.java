@@ -21,13 +21,12 @@ public class LoginServiceImpl implements LoginService {
     public UserResponseDTO getUserByToken(String token) {
         String username = getUsernameFromToken(token);
         Optional<User> optionalUser = userService.findByName(username);
-        if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            userService.update(user);
-            return new UserResponseDTO(user.getId(), user.getCreatedAt(), user.getLastLogin(), user.getToken(), user.isEnabled());
-        } else {
+        if (!optionalUser.isPresent()) {
             throw new UsernameNotFoundException("User not found with email: " + username);
         }
+        User user = optionalUser.get();
+        userService.update(user);
+        return new UserResponseDTO(user.getId(), user.getCreatedAt(), user.getLastLogin(), user.getToken(), user.isEnabled());
     }
 
     private String getUsernameFromToken(String token) {

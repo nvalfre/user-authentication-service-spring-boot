@@ -1,14 +1,5 @@
 DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS phones;
-
-CREATE TABLE `user_roles` (
-                              `id` int(11) NOT NULL AUTO_INCREMENT,
-                              `username` varchar(50) NOT NULL,
-                              `AUTHORITY` varchar(50) NOT NULL,
-                              PRIMARY KEY (`id`),
-                              UNIQUE KEY `uni_username_role` (`AUTHORITY`,`username`)
-);
 
 CREATE TABLE users (
                        id INT AUTO_INCREMENT PRIMARY KEY,
