@@ -9,7 +9,7 @@ CREATE TABLE users (
 );
 
 CREATE TABLE phones (
-                        id INT AUTO_INCREMENT PRIMARY KEY,
+                        id VARCHAR(120) PRIMARY KEY,
                         user_id VARCHAR(120) NOT NULL,
                         number BIGINT NOT NULL,
                         city_code INT NOT NULL,
@@ -18,6 +18,6 @@ CREATE TABLE phones (
 
 INSERT INTO users (id, user_name, email, password) VALUES ('1', 'nv', 'nv@test.com', '$2y$10$18hJHKHFhYnh9TcPD6/KDOtsI.JD7qewqLaqVjOEhurALMHopwn.i');
 
-INSERT INTO phones (user_id, number, city_code, country_code) VALUES ('1', 303, 456, 'ARG');
-INSERT INTO phones (user_id, number, city_code, country_code) VALUES ('1', 303, 456, 'ARG');
-INSERT INTO phones (user_id, number, city_code, country_code) VALUES ('1', 303, 456, 'ARG');
+INSERT INTO phones (id, user_id, number, city_code, country_code) VALUES ('1','1', 303, 456, 'ARG');
+INSERT INTO phones (id, user_id, number, city_code, country_code) VALUES ('2','1', 303, 456, 'ARG');
+INSERT INTO phones (id, user_id, number, city_code, country_code) VALUES ('3','1', 303, 456, 'ARG');

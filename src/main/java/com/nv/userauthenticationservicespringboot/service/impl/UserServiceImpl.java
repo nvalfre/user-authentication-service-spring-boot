@@ -1,5 +1,6 @@
 package com.nv.userauthenticationservicespringboot.service.impl;
 
+import com.nv.userauthenticationservicespringboot.config.JwtUtil;
 import com.nv.userauthenticationservicespringboot.model.dto.UserResponseDTO;
 import com.nv.userauthenticationservicespringboot.model.entity.Phone;
 import com.nv.userauthenticationservicespringboot.model.entity.User;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.nv.userauthenticationservicespringboot.service.UserService;
 
 import javax.persistence.EntityExistsException;
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
@@ -30,7 +32,9 @@ public class UserServiceImpl implements UserService {
     public static final String PASSWORD_REGEX = "^(?=.*[A-Z])(?=.*\\d{2,})(?=.*[a-z]).{8,12}$";
     private final UserRepository userRepository;
     private final PhoneRepository phoneRepository;
+    private final JwtUtil jwtUtil;
 
+    @Transactional
     public UserResponseDTO createUser(UserDTO userDto) {
         if (!isValidEmail(userDto.getEmail())) {
             throw new IllegalArgumentException("Invalid email address");
@@ -45,7 +49,7 @@ public class UserServiceImpl implements UserService {
         final User user = buildNewUser(userDto);
         final User save = userRepository.save(user);
         final List<Phone> phones = userDto.getPhones().stream()
-                .map(phoneDto -> new Phone(phoneDto.getNumber(), phoneDto.getCityCode(), phoneDto.getCountryCode(), user.getId()))
+                .map(phoneDto -> new Phone(phoneDto.getNumber(), phoneDto.getCitycode(), phoneDto.getContrycode(), user.getId()))
                 .collect(Collectors.toList());
         phoneRepository.saveAll(phones);
         final LocalDateTime now = LocalDateTime.now();
@@ -53,6 +57,7 @@ public class UserServiceImpl implements UserService {
                 .id(String.valueOf(save.getId()))
                 .created(now)
                 .lastLogin(now)
+                .token(jwtUtil.generateToken(userDto.getName()))
                 .isActive(true)
                 .build();
     }

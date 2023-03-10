@@ -16,6 +16,7 @@ import java.util.function.Function;
 public class JwtUtil {
 
 
+    public static final SignatureAlgorithm SIGNATURE_ALGORITHM = SignatureAlgorithm.HS256;
     @Value("jwt.secret")
     private String secret;
 
@@ -46,9 +47,20 @@ public class JwtUtil {
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
-        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
-                .signWith(SignatureAlgorithm.HS256, secret).compact();
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(subject)
+                .setIssuedAt(getIat())
+                .setExpiration(getExpiration())
+                .signWith(SIGNATURE_ALGORITHM, secret).compact();
+    }
+
+    private static Date getIat() {
+        return new Date(System.currentTimeMillis());
+    }
+
+    private static Date getExpiration() {
+        return new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10);
     }
 
     public Boolean validateToken(String token, UserDetails userDetails) {
