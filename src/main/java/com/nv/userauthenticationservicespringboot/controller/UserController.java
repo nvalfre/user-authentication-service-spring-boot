@@ -1,7 +1,7 @@
 package com.nv.userauthenticationservicespringboot.controller;
 
+import com.nv.userauthenticationservicespringboot.model.dto.ErrorMessage;
 import com.nv.userauthenticationservicespringboot.model.dto.UserDTO;
-import com.nv.userauthenticationservicespringboot.model.dto.UserResponseDTO;
 import com.nv.userauthenticationservicespringboot.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +21,11 @@ public class UserController {
         try {
             return ResponseEntity.ok(userService.createUser(userDto));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            final HttpStatus badRequest = HttpStatus.BAD_REQUEST;
+            return ResponseEntity.status(badRequest).body(ErrorMessage.builder()
+                    .message(e.getMessage())
+                    .status(badRequest.value())
+                    .build());
         }
     }
 }

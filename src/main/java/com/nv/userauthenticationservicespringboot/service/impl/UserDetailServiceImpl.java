@@ -2,7 +2,6 @@ package com.nv.userauthenticationservicespringboot.service.impl;
 
 import com.nv.userauthenticationservicespringboot.model.entity.User;
 import com.nv.userauthenticationservicespringboot.repository.UserRepository;
-import com.nv.userauthenticationservicespringboot.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

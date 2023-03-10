@@ -4,7 +4,6 @@
 package com.nv.userauthenticationservicespringboot.config;
 
 import com.nv.userauthenticationservicespringboot.service.impl.UserDetailServiceImpl;
-import com.nv.userauthenticationservicespringboot.service.impl.UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

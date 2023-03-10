@@ -1,18 +1,17 @@
 package com.nv.userauthenticationservicespringboot.service.impl;
 
 import com.nv.userauthenticationservicespringboot.config.JwtUtil;
+import com.nv.userauthenticationservicespringboot.model.dto.UserDTO;
 import com.nv.userauthenticationservicespringboot.model.dto.UserResponseDTO;
 import com.nv.userauthenticationservicespringboot.model.entity.Phone;
 import com.nv.userauthenticationservicespringboot.model.entity.User;
 import com.nv.userauthenticationservicespringboot.repository.PhoneRepository;
 import com.nv.userauthenticationservicespringboot.repository.UserRepository;
+import com.nv.userauthenticationservicespringboot.service.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
-import com.nv.userauthenticationservicespringboot.model.dto.UserDTO;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.nv.userauthenticationservicespringboot.service.UserService;
 
 import javax.persistence.EntityExistsException;
 import javax.transaction.Transactional;
@@ -21,7 +20,6 @@ import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
