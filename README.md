@@ -28,32 +28,40 @@ Spring boot demo for user with roles using JWT and H2.
 POST - /sing-up - genetare new token
 
 ```
-curl --request POST \
---url http://localhost:8080/sign-up \
+curl --location --request POST 'http://localhost:8080/sign-up' \
 --header 'Content-Type: application/json' \
---data '{
-"name": "John Doe",
-"email": "johndoe@example.com",
-"password": "Abc123456",
-"phones": [
-    {
-        "number": 1234567890,
-        "citycode": 123,
-        "contrycode": "+1"
-    }
-]
+--header 'Cookie: JSESSIONID=EA8398A9C378E56CAE1229E99313B2BA' \
+--data-raw '{
+    "name": "nv2",
+    "email": "123@gmail.com",
+    "password": "Pa55word",
+    "phones": [
+        {
+            "number": 33,
+            "citycode": 456,
+            "contrycode": "ARG"
+        }
+    ]
 }'
 ```
 
 POST - /login
 ```
-curl --request POST \
-  --url http://localhost:8080/login \
-  --header 'Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huZG9lQGV4YW1wbGUuY29tIiwiaWF0IjoxNjIzNTMwOTk0LCJleHAiOjE2MjM1MzE1OTR9.hgopXa3q0o5U6Cc5U5iqX9YdAfKk7AHf2x_qUJ10smU6eJCDKj3u3JiZVylC9EhqfrZV7nMxR1BcRrjJHd8b7A' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "username": "johndoe@example.com"
+curl --location --request POST 'http://localhost:8080/login' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: JSESSIONID=EA8398A9C378E56CAE1229E99313B2BA' \
+--data-raw '{
+    "name": "nv",
+    "password": 123
 }'
+```
+
+GET - /
+```
+curl --location --request GET 'http://localhost:8080/' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJudjIiLCJleHAiOjE2Nzg0NDQ4MjEsImlhdCI6MTY3ODQwODgyMX0.RloIJo3dZTn0ERRZeNpA_o3zVlEmpYQySLHyYq1VsSA' \
+--header 'Cookie: JSESSIONID=EA8398A9C378E56CAE1229E99313B2BA'
 ```
 
 
