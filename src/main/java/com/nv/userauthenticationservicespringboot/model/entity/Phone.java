@@ -1,7 +1,7 @@
 /**
  * 
  */
-package model.entity;
+package com.nv.userauthenticationservicespringboot.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,9 +21,8 @@ public class Phone {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
-	private User user;
+	@Column(name = "user_id")
+	private String userId;
 
 	private long number;
 
@@ -33,10 +32,10 @@ public class Phone {
 	@Column(name = "country_code")
 	private String countryCode;
 
-	public Phone(long number, int cityCode, String countryCode) {
+	public Phone(long number, int cityCode, String countryCode, String userId) {
 		this.number = number;
 		this.cityCode = cityCode;
 		this.countryCode = countryCode;
+		this.userId = userId;
 	}
-
 }

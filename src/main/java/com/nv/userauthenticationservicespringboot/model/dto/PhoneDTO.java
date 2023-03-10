@@ -1,4 +1,4 @@
-package model.dto;
+package com.nv.userauthenticationservicespringboot.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
