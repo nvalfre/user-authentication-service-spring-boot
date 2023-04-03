@@ -3,24 +3,20 @@ package com.nv.userauthenticationservicespringboot.service.impl;
 import com.nv.userauthenticationservicespringboot.config.JwtUtil;
 import com.nv.userauthenticationservicespringboot.model.dto.LoginRequestDTO;
 import com.nv.userauthenticationservicespringboot.model.dto.LoginResponseDTO;
-import com.nv.userauthenticationservicespringboot.model.dto.UserResponseDTO;
 import com.nv.userauthenticationservicespringboot.model.entity.User;
 import com.nv.userauthenticationservicespringboot.repository.UserRepository;
-import com.nv.userauthenticationservicespringboot.service.LoginService;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -28,9 +24,9 @@ import static org.mockito.Mockito.when;
 class LoginServiceImplTest {
 
     @Mock
-    private  AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
     @Mock
-    private  JwtUtil jwtUtil;
+    private JwtUtil jwtUtil;
     @Mock
     private Authentication authentication;
     @Mock
